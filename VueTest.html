@@ -5,8 +5,25 @@
     <title>Title</title>
 </head>
 <body>
-<div id="app">
+<div id="app" >
     {{ message }}
+</div>
+
+<!--
+使用自定义组件
+-->
+<div id="ap">
+  <cao></cao>
+</div>
+
+<!--使用自定义组建创建列表-->
+<div id="app1">
+    <caomeng v-for="item in items" v-bind:meng="item"></caomeng>
+</div>
+
+<hr>
+<div id="app001">
+  <navigation-bar v-bind:column='message'></navigation-bar>
 </div>
 
 <script src="vue.js"></script>
@@ -16,6 +33,49 @@
         data: {
             message: 'Hello Vue!'
         }
+    })
+
+// component
+//   先注册组件
+    Vue.component('cao',{
+        template:'<li>ooook</li>'
+    })
+//    再实例化vue
+    var vm = new Vue(
+        {
+            el: '#ap'
+        }
+    )
+
+    //使用自定义组建创建列表
+    Vue.component('caomeng',{
+        props: ['meng'],
+        template: '<li>{{meng}}</li>'
+    })
+    //vue
+    var apptest1 = new Vue({
+        el:'#app1',
+        data: {
+            items: [
+                "python",
+                "js",
+                "java"
+            ]
+        }
+    })
+
+    //再次使用自定义组件
+    //先定义组件
+    Vue.component('navigationBar',{
+      props: ['column'],
+      template:'<span> {{column}}</span>>'
+    })
+    //实例化vue
+    var appTest001 = new Vue({
+      el: '#app001',
+      data: {
+        message: 'hello, world'
+      }
     })
 </script>
 </body>

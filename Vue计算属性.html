@@ -1,0 +1,62 @@
+<head>
+<meta charset="UTF-8">
+<title>Title</title>
+</head>
+<body>
+<!--view层，模板-->
+<div id="app">
+  <p>currentTime1:{{currentTime1()}}</p>
+  <p>currentTime2:{{currentTime2}}</p>
+</div>
+
+<!--
+计算属性
+-->
+<div id="app02">
+  <div>{{timeNow}}</div>
+  <div>{{timeNow}}</div>
+</div>
+
+<!--1.导入Vue.js-->
+<script src="vue.js"></script>
+<script type="text/javascript">
+  var vm = new Vue({
+    el:"#app",
+    data:{
+      message:"pan"
+    },
+
+    methods:{
+      currentTime1:function(){
+        return Date.now();//返回一个时间戳
+      }
+    },
+
+    computed:{
+      currentTime2:function(){//计算属性：methods，computed方法名不能重名，重名之后，只会调用methods的方法
+        this.message;
+        return Date.now();//返回一个时间戳
+      }
+    }
+  });
+
+  var vm01 = new Vue({
+    el: '#app02',
+    data: {
+      message: 'ok'
+    },
+    method:{
+      timeNow: function(){
+        return Date.now()
+      }
+    },
+
+    computed:{
+      timeNow: function (){
+        this.message
+        return Date.now()
+    }
+    }
+  })
+</script>
+</body>
